@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import RustCalculator from './components/RustCalculator';
+import TextToShader from './components/TextToShader';
 import './App.css';
 
 function App() {
+  const [activeTab, setActiveTab] = useState('calculator');
+
+  useEffect(() => {
+    document.title = activeTab === 'calculator' ? 'Rust Calculator' : 'Shader';
+  }, [activeTab]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="tabs">
+        <button 
+          className={activeTab === 'calculator' ? 'active' : ''} 
+          onClick={() => setActiveTab('calculator')}
         >
-          Learn React
-        </a>
-      </header>
+          Rust Calculator
+        </button>
+        <button 
+          className={activeTab === 'shader' ? 'active' : ''} 
+          onClick={() => setActiveTab('shader')}
+        >
+          Text-to-Shader
+        </button>
+      </div>
+
+      <div className="tab-content">
+        {activeTab === 'calculator' ? (
+          <RustCalculator />
+        ) : (
+          <TextToShader />
+        )}
+      </div>
     </div>
   );
 }
