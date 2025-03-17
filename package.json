@@ -13,8 +13,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build:rust": "cd src/rust-calculator && wasm-pack build --target web",
+    "start": "npm run build:rust && react-scripts start",
+    "build": "npm run build:rust && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
