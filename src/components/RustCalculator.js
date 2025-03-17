@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import init, { calculate } from '../rust-calculator/pkg/rust_calculator';
+import init, { calculate } from "rust-calculator";
 
 function RustCalculator() {
   const [expression, setExpression] = useState('');

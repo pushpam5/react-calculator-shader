@@ -10,8 +10,8 @@
 
 # production
 /build
-/src/rust-calculator/pkg
-/src/rust-calculator/target
+rust-calculator/pkg
+rust-calculator/target
 
 # misc
 .DS_Store
