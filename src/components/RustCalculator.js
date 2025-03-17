@@ -16,7 +16,11 @@ function RustCalculator() {
     event.preventDefault();
     if (wasmLoaded) {
       const calculationResult = calculate(expression);
-      setResult(calculationResult);
+      if (Number.isNaN(calculationResult)) {
+        setResult("Invalid expression");
+      }else{
+        setResult(calculationResult);
+      }
     }
   };
 
