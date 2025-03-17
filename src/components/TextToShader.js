@@ -179,8 +179,6 @@ const TextToShader = () => {
     // Set loading state to true
     setLoading(true);
     // Fetch shader from API
-    console.log(API_URL);
-    console.log("ENDPOINT: process.env.REACT_APP_API_URL", process.env.REACT_APP_API_URL);
     fetch(`${API_URL}/api/shader`, {
       method: 'POST',
       headers: {
@@ -191,7 +189,6 @@ const TextToShader = () => {
       }),
     })
       .then(response => {
-        console.log(response);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -221,12 +218,12 @@ const TextToShader = () => {
 
   return (
     <div className="shader-tab">
-      <h2>Text-to-Shader</h2>
+      <h2>Create Shader With Text</h2>
       
       <div>
         <div>
           <form onSubmit={handleSubmit}>
-            <input 
+            <input
               type="text" 
               value={prompt} 
               onChange={(e) => setPrompt(e.target.value)} 

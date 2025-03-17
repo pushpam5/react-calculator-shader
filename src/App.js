@@ -7,7 +7,7 @@ function App() {
   const [activeTab, setActiveTab] = useState('calculator');
 
   useEffect(() => {
-    document.title = activeTab === 'calculator' ? 'Rust Calculator' : 'Shader';
+    document.title = activeTab === 'calculator' ? 'Calculator' : 'Shader';
   }, [activeTab]);
 
   return (
@@ -17,13 +17,13 @@ function App() {
           className={activeTab === 'calculator' ? 'active' : ''} 
           onClick={() => setActiveTab('calculator')}
         >
-          Rust Calculator
+          Calculator
         </button>
         <button 
           className={activeTab === 'shader' ? 'active' : ''} 
           onClick={() => setActiveTab('shader')}
         >
-          Text-to-Shader
+          Text to Shader
         </button>
       </div>
 

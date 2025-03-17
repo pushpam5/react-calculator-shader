@@ -26,7 +26,7 @@ function RustCalculator() {
 
   return (
     <div className="calculator-tab">
-      <h2>Rust Calculator</h2>
+      <h2>Evaluate Expressions</h2>
       <form onSubmit={handleCalculate}>
         <input
           type="text"
@@ -36,7 +36,7 @@ function RustCalculator() {
         />
         <button type="submit" disabled={!expression || !wasmLoaded}>Calculate</button>
       </form>
-      {result && <div className="result">Result: {result}</div>}
+      {(result !== '' || result === 0) && <div className="result">Result: {result}</div>}
     </div>
   );
 }

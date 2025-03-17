@@ -3,7 +3,10 @@ use wasm_bindgen::prelude::*;
 #[wasm_bindgen]
 pub fn calculate(expression: &str) -> f64 {
     let tokens: Vec<char> = expression.chars().filter(|c| !c.is_whitespace()).collect();
-    parse_expression(&tokens, &mut 0)
+    let result = parse_expression(&tokens, &mut 0);
+    
+    // Round to 5 decimal places
+    (result * 100000.0).round() / 100000.0
 }
 
 fn parse_expression(tokens: &[char], pos: &mut usize) -> f64 {
@@ -42,6 +45,14 @@ fn parse_term(tokens: &[char], pos: &mut usize) -> f64 {
                 }
                 result /= divisor;
             }
+            '%' => {
+                *pos += 1;
+                let modulus = parse_factor(tokens, pos);
+                if modulus == 0.0 {
+                    return f64::NAN;
+                }
+                result %= modulus;
+            }
             _ => break,
         }
     }
@@ -69,5 +80,14 @@ fn parse_factor(tokens: &[char], pos: &mut usize) -> f64 {
         *pos += 1;
     }
 
-    number.parse().unwrap_or(f64::NAN)
+    let base = number.parse().unwrap_or(f64::NAN);
+    
+    // Check for power operation
+    if *pos < tokens.len() && tokens[*pos] == '^' {
+        *pos += 1;
+        let exponent = parse_factor(tokens, pos);
+        return base.powf(exponent);
+    }
+    
+    base
 }
