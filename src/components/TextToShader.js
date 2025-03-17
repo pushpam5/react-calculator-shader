@@ -11,7 +11,7 @@ const TextToShader = () => {
   const animationRef = useRef(null);
   const startTimeRef = useRef(Date.now());
 
-  const API_URL = process.env.API_URL || 'http://localhost:3000';
+  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
 
   const vertexShaderSource = `#version 300 es
     in vec4 aVertexPosition;
@@ -180,7 +180,7 @@ const TextToShader = () => {
     setLoading(true);
     // Fetch shader from API
     console.log(API_URL);
-    console.log("ENDPOINT: process.env.API_URL", process.env.API_URL);
+    console.log("ENDPOINT: process.env.REACT_APP_API_URL", process.env.REACT_APP_API_URL);
     fetch(`${API_URL}/api/shader`, {
       method: 'POST',
       headers: {
