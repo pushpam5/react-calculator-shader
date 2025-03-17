@@ -179,6 +179,8 @@ const TextToShader = () => {
     // Set loading state to true
     setLoading(true);
     // Fetch shader from API
+    console.log(API_URL);
+    console.log("ENDPOINT", process.env.API_ENDPOINT);
     fetch(`${API_URL}/api/shader`, {
       method: 'POST',
       headers: {
