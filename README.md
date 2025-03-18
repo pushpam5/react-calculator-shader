@@ -2,6 +2,14 @@
 
 A React application that combines WebGL shader generation and Rust-powered calculator.
 
+You can try out the live demo at [https://react-calculator-shader.vercel.app/](https://react-calculator-shader.vercel.app/)
+
+The live demo includes:
+- A WebAssembly-powered calculator for evaluating mathematical expressions
+- An AI-powered shader generator that converts text descriptions into GLSL code
+- Real-time preview of generated shaders
+- Copy functionality to use the shaders in your own projects
+
 ## Features
 
 ### Text to Shader Generator
@@ -83,13 +91,3 @@ The Text to Shader feature requires a backend API that generates GLSL shader cod
 1. Enter a description of the desired visual effect in the input field
 2. Click "Generate Shader" and wait for the AI to create your shader
 3. View the live preview and copy the shader code if desired
-
-## Live Demo
-
-You can try out the live demo at [https://react-calculator-shader.vercel.app/](https://react-calculator-shader.vercel.app/)
-
-The live demo includes:
-- A WebAssembly-powered calculator for evaluating mathematical expressions
-- An AI-powered shader generator that converts text descriptions into GLSL code
-- Real-time preview of generated shaders
-- Copy functionality to use the shaders in your own projects
