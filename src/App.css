@@ -1,165 +1,413 @@
+/* Main application styles */
+:root {
+  --primary-color: #3498db;
+  --primary-hover: #2980b9;
+  --secondary-color: #2ecc71;
+  --secondary-hover: #27ae60;
+  --dark-color: #2c3e50;
+  --light-color: #ecf0f1;
+  --error-color: #e74c3c;
+  --success-color: #2ecc71;
+  --text-color: #333;
+  --border-radius: 8px;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
 .App {
-  text-align: center;
-  padding: 20px;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  min-height: 600px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header {
+  text-align: center;
+  margin-bottom: 30px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+header h1 {
+  color: var(--dark-color);
+  margin-bottom: 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.subtitle {
+  color: #777;
+  margin-top: 0;
 }
 
-.App-link {
-  color: #61dafb;
+footer {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  color: #777;
+  font-size: 0.9rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
+/* Tab Navigation */
 .tabs {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 15px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
 }
 
 .tabs button {
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
-  background: #808080;
+  background: #f0f0f0;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   font-size: 16px;
+  font-weight: 600;
+  color: #555;
+  display: flex;
+  align-items: center;
+  transition: var(--transition);
+}
+
+.tabs button:hover {
+  background: #e0e0e0;
 }
 
 .tabs button.active {
-  background: #007bff;
+  background: var(--primary-color);
   color: white;
 }
 
- form {
+.icon {
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.tab-content {
+  animation: fadeIn 0.3s ease;
+}
+
+/* Component Styles */
+.calculator-tab, .shader-tab {
+  padding: 20px;
+}
+
+.description {
+  color: #666;
+  margin-bottom: 25px;
+  font-size: 1rem;
+}
+
+/* Form Styles */
+.input-wrapper {
   display: flex;
+  flex-direction: column;
   gap: 10px;
   margin-bottom: 20px;
 }
 
- input {
-  flex: 1;
-  padding: 8px;
+.calculator-input, .shader-input {
+  padding: 12px 15px;
   font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  width: 100%;
+  transition: var(--transition);
 }
 
- button {
-  padding: 8px 16px;
-  background: #28a745;
-  color: white;
+.calculator-input:focus, .shader-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.primary-button, .secondary-button {
+  padding: 12px 24px;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
+  font-weight: 600;
   cursor: pointer;
+  transition: var(--transition);
+  flex: 1;
+}
+
+.primary-button {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.primary-button:hover {
+  background-color: var(--primary-hover);
+}
+
+.secondary-button {
+  background-color: #f0f0f0;
+  color: #555;
+}
+
+.secondary-button:hover {
+  background-color: #e0e0e0;
+}
+
+.primary-button:disabled, .secondary-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Examples */
+.examples-container {
+  margin-bottom: 25px;
+}
+
+.examples-container h4 {
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.example-chip {
+  background-color: #f0f0f0;
+  color: #555;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.example-chip:hover {
+  background-color: #e0e0e0;
+  border-color: #ccc;
+}
+
+/* Results */
+.result-container {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--primary-color);
 }
 
 .result {
   font-size: 18px;
-  margin-top: 20px;
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 4px;
 }
 
-.error {
-  color: #dc3545;
-  margin-top: 10px;
-  padding: 10px;
-  background: #f8d7da;
-  border-radius: 4px;
+.result-label {
+  font-weight: 600;
+  margin-right: 10px;
+  color: #555;
 }
 
-.output-heading {
-  text-align: left;
+.result-value {
+  font-size: 24px;
+  color: var(--primary-color);
 }
 
-/* TextToShader Component Styles */
+/* History */
+.history-section {
+  margin-top: 30px;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.history-header h3 {
+  margin: 0;
+  color: #555;
+}
+
+.clear-history-button {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: underline;
+}
+
+.clear-history-button:hover {
+  color: var(--error-color);
+}
+
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.history-item:hover {
+  background-color: #f5f5f5;
+}
+
+.history-expression {
+  color: #555;
+}
+
+.history-result {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Shader Output */
 .shader-output-container {
   display: flex;
+  flex-direction: column;
   gap: 20px;
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
-.output-section {
-  flex: 1;
+@media (min-width: 768px) {
+  .shader-output-container {
+    flex-direction: row;
+  }
+  
+  .output-section {
+    flex: 1;
+  }
+}
+
+.output-section h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.shader-canvas {
+  width: 100%;
+  height: 300px;
+  border-radius: var(--border-radius);
+  background-color: #000;
+  box-shadow: var(--shadow);
 }
 
 .code-container {
   position: relative;
   height: 300px;
   overflow: auto;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
   background-color: #f5f5f5;
-  font-family: monospace;
 }
 
 .copy-button {
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: 10px;
+  right: 10px;
   z-index: 10;
-  padding: 4px 8px;
-  font-size: 12px;
-  background-color: #007bff;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  background-color: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  opacity: 0.8;
-  transition: opacity 0.2s ease;
+  transition: var(--transition);
 }
 
 .copy-button:hover {
-  opacity: 1;
+  background-color: var(--primary-hover);
 }
 
-.code-container pre {
-  margin: 10px;
-  padding-top: 30px;
+.code-block {
+  margin: 15px;
+  padding: 10px;
   white-space: pre-wrap;
-  word-break: break-all;
-  text-align: left;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #333;
 }
 
-.preview-section canvas {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #000;
+/* Error & Loading States */
+.error-message {
+  color: var(--error-color);
+  background-color: rgba(231, 76, 60, 0.1);
+  padding: 12px;
+  border-radius: var(--border-radius);
+  margin: 15px 0;
+  font-size: 0.9rem;
 }
 
-/* Make sure the headings are consistent */
-.output-section h3 {
-  margin-bottom: 10px;
+.loading-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: #777;
+  font-size: 1.1rem;
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-right: 10px;
   font-size: 1.2rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+  .App {
+    padding: 15px;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .tabs {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .tabs button {
+    width: 100%;
+  }
 }

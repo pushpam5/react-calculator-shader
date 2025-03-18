@@ -5,6 +5,7 @@ const TextToShader = () => {
   const [shaderCode, setShaderCode] = useState('');
   const [loading, setLoading] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
+  const [error, setError] = useState('');
   const canvasRef = useRef(null);
   const glRef = useRef(null);
   const programRef = useRef(null);
@@ -176,8 +177,14 @@ const TextToShader = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Set loading state to true
+    if (!prompt.trim()) {
+      setError('Please enter a shader description.');
+      return;
+    }
+
+    setError('');
     setLoading(true);
+
     // Fetch shader from API
     fetch(`${API_URL}/api/shader`, {
       method: 'POST',
@@ -213,60 +220,90 @@ const TextToShader = () => {
       })
       .catch(err => {
         console.error('Failed to copy code: ', err);
+        setError('Failed to copy code to clipboard.');
       });
+  };
+
+  const handleClearAll = () => {
+    setPrompt('');
+    setShaderCode('');
+    setError('');
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
   };
 
   return (
     <div className="shader-tab">
-      <h2>Create Shader With Text</h2>
+      <h2>Create Shader From Text</h2>
+      <p className="description">
+        Describe the shader effect you want to create, and we'll generate GLSL code for you.
+      </p>
       
-      <div>
-        <div>
-          <form onSubmit={handleSubmit}>
+      <div className="shader-container">
+        <form onSubmit={handleSubmit}>
+          <div className="input-wrapper">
             <input
               type="text" 
               value={prompt} 
               onChange={(e) => setPrompt(e.target.value)} 
-              placeholder="Describe the shader you wish to render e.g. A rotating cube with a gradient background" 
+              placeholder="Describe your shader (e.g., Neon grid with pulsing lights)" 
               disabled={loading}
+              className="shader-input"
             />
-            <button 
-              type="submit"
-              disabled={loading}
-            >
-              {loading ? 'Generating...' : 'Generate Shader'}
-            </button>
-          </form>
+            <div className="button-group">
+              <button 
+                type="submit"
+                disabled={loading}
+                className="primary-button"
+              >
+                {loading ? 
+                  <span className="loading-spinner">⟳</span> : 
+                  'Generate Shader'}
+              </button>
+              <button 
+                type="button"
+                onClick={handleClearAll}
+                className="secondary-button"
+                disabled={loading || (!prompt && !shaderCode)}
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </form>
 
-          {shaderCode && (
-            <div className="shader-output-container">
-              <div className="output-section preview-section">
-                <h3>Shader Preview:</h3>
-                <canvas 
-                  ref={canvasRef} 
-                  width="300" 
-                  height="300"
-                ></canvas>
-              </div>
+        {error && <div className="error-message">{error}</div>}
 
-              <div className="output-section code-section">
-                <h3>Shader Code Snippet:</h3>
-                <div className="code-container">
-                  <button 
-                    className="copy-button" 
-                    onClick={handleCopyCode}
-                    title="Copy to clipboard"
-                  >
-                    {copySuccess ? '✓' : 'Copy'}
-                  </button>
-                  <pre>
-                    {shaderCode}
-                  </pre>
-                </div>
+        {shaderCode && (
+          <div className="shader-output-container">
+            <div className="output-section preview-section">
+              <h3>Preview</h3>
+              <canvas 
+                ref={canvasRef} 
+                width="400" 
+                height="300"
+                className="shader-canvas"
+              ></canvas>
+            </div>
+
+            <div className="output-section code-section">
+              <h3>Shader Code</h3>
+              <div className="code-container">
+                <button 
+                  className="copy-button" 
+                  onClick={handleCopyCode}
+                  title="Copy to clipboard"
+                >
+                  {copySuccess ? '✓ Copied!' : 'Copy'}
+                </button>
+                <pre className="code-block">
+                  {shaderCode}
+                </pre>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
