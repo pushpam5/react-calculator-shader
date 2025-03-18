@@ -3,7 +3,21 @@ use wasm_bindgen::prelude::*;
 #[wasm_bindgen]
 pub fn calculate(expression: &str) -> f64 {
     let tokens: Vec<char> = expression.chars().filter(|c| !c.is_whitespace()).collect();
-    let result = parse_expression(&tokens, &mut 0);
+    
+    // Check for invalid characters first
+    for c in &tokens {
+        if !c.is_digit(10) && !['+', '-', '*', '/', '%', '^', '.', '(', ')'].contains(c) {
+            return f64::NAN;
+        }
+    }
+    
+    let mut pos = 0;
+    let result = parse_expression(&tokens, &mut pos);
+    
+    // Check if we've consumed all tokens - if not, the expression is invalid
+    if pos < tokens.len() {
+        return f64::NAN;
+    }
     
     // Round to 5 decimal places
     (result * 100000.0).round() / 100000.0

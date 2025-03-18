@@ -1,70 +1,95 @@
-# Getting Started with Create React App
+# Rust-WASM Calculator and WebGL Shader Generator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React application that combines WebGL shader generation and Rust-powered calculator.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### Text to Shader Generator
+- Transform text descriptions into WebGL shaders
+- Real-time shader preview in the browser
+- Copy generated shader code with a single click
 
-### `npm start`
+### Rust-Powered Calculator
+- Fast mathematical expression evaluation using WebAssembly
+- Supports operations: addition, subtraction, multiplication, division, modulo, and exponentiation
+- Handles parenthesized expressions for complex calculations
+- Precise results rounded to 5 decimal places
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Frontend**: React
+- **WebGL**: WebGL 2.0 for shader rendering
+- **WebAssembly**: Rust compiled to WASM for calculations
+- **Backend API**: REST API written in Elixir which makes LLM calls with given prompt
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
+- Node.js
+- Rust and wasm-pack (for development of the calculator module)
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository
+   ```
+   git clone git@github.com:pushpam5/react-calculator-shader.git
+   cd react-calculator-shader
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Build the WebAssembly module
+   ```
+   npm run build:wasm
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Install dependencies
+   ```
+   npm install
+   ```
 
-### `npm run eject`
+4. Start the development server
+   ```
+   npm start
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+5. Open [http://localhost:3000](http://localhost:3000) to view the app in your browser
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Developing the Rust Calculator
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+If you want to modify the Rust calculator component:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Navigate to the `rust-calculator` directory
+2. Make your changes to the Rust code
+3. Build the WASM module:
+   ```
+   npm run build:wasm
+   ```
+4. The compiled WASM will be available for the React app to use
 
-## Learn More
+## API Server Setup
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The Text to Shader feature requires a backend API that generates GLSL shader code from text descriptions. To set this up:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. See the backend repository at [Elixir Shader]([https://github.com/pushpam5/elixir-shader)
+2. Follow the installation instructions there
+3. Make sure the API is running on the URL http://localhost:4000
 
-### Code Splitting
+## Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Calculator Tab
+1. Enter a mathematical expression in the input field (e.g., `2+2`, `(3+4)*2`, `2^3`)
+2. Click "Calculate" to see the result
 
-### Analyzing the Bundle Size
+### Text to Shader Tab
+1. Enter a description of the desired visual effect in the input field
+2. Click "Generate Shader" and wait for the AI to create your shader
+3. View the live preview and copy the shader code if desired
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Live Demo
 
-### Making a Progressive Web App
+You can try out the live demo at [https://react-calculator-shader.vercel.app/](https://react-calculator-shader.vercel.app/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The live demo includes:
+- A WebAssembly-powered calculator for evaluating mathematical expressions
+- An AI-powered shader generator that converts text descriptions into GLSL code
+- Real-time preview of generated shaders
+- Copy functionality to use the shaders in your own projects
