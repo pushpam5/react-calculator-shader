@@ -7,11 +7,12 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^13.5.0",
+    "@vercel/analytics": "^1.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "rust-calculator": "file:./rust-calculator/wasm-build"
+    "rust-calculator": "file:./rust-calculator/wasm-build",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "build:wasm": "cd rust-calculator && ~/.cargo/bin/wasm-pack build --target web --out-dir ./wasm-build",
