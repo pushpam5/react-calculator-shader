@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import RustCalculator from './components/RustCalculator';
 import TextToShader from './components/TextToShader';
 import './App.css';
-import Analytics from '@vercel/analytics/react';
 
 function App() {
   const [activeTab, setActiveTab] = useState('calculator');
@@ -45,7 +44,6 @@ function App() {
       <footer>
         <p>✨ View the source code on <a href="https://github.com/pushpam5/react-calculator-shader" target="_blank" rel="noopener noreferrer">GitHub</a></p>
       </footer>
-      <Analytics />
     </div>
   );
 }
